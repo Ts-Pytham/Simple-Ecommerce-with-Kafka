@@ -26,6 +26,10 @@ public class ProductDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration<Product>(new ProductEntityType());
         modelBuilder.ApplyConfiguration<Category>(new CategoryEntityType());
+
+        modelBuilder.CreateSeeds();
+
+        base.OnModelCreating(modelBuilder);
     }
 
     public override ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(
