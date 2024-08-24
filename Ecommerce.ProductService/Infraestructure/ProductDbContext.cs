@@ -32,6 +32,11 @@ public class ProductDbContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.EnableSensitiveDataLogging();
+        base.OnConfiguring(optionsBuilder);
+    }
     public override ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(
         TEntity entity, 
         CancellationToken cancellationToken = default)

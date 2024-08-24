@@ -12,5 +12,5 @@ public class Product : IEntity
     public string CreatedBy { get; set; } = string.Empty;
     public DateTime? UpdatedAt { get; set; }
     public string? UpdatedBy { get; set; }
-    public Category Category { get; set; } = new();
+    public Category Category { get; set; } = default!;
 }
