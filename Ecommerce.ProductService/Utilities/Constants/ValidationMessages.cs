@@ -8,4 +8,5 @@ public class ValidationMessages
     public const string ProductNotInStock = "Product is not in stock";
     public const string ProductQuantityGreaterThanZero = "Product quantity must be greater than zero";
     public const string PriceGreaterThanZero = "Price must be greater than zero";
+    public const string CategoryNameAlreadyExists = "Category name already exists";
 }
