@@ -1,6 +1,6 @@
-﻿using Ecommerce.Models;
+﻿using Ecommerce.Shared.Models;
 using Ecommerce.ProductService.Infraestructure;
-using Ecommerce.ProductService.Utilities.Constants;
+using Ecommerce.Shared.Utilities.Constants;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SimpleResults;

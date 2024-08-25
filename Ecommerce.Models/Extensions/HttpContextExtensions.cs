@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
-namespace Ecommerce.Models.Extensions;
+namespace Ecommerce.Shared.Extensions;
 public static class HttpContextExtensions
 {
     public static string? GetUserId(this IHttpContextAccessor httpContextAccessor)

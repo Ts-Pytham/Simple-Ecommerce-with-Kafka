@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.Models.Providers;
+﻿namespace Ecommerce.Shared.Providers;
 public interface IDateTimeProvider
 {
     DateTime Now { get; }

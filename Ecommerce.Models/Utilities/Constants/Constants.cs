@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.ProductService.Utilities.Constants;
+﻿namespace Ecommerce.Shared.Utilities.Constants;
 
 public class Constants
 {

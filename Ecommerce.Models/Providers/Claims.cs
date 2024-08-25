@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.Models.Providers;
+﻿namespace Ecommerce.Shared.Providers;
 public class Claims
 {
     public string UserId { get; set; } = string.Empty;

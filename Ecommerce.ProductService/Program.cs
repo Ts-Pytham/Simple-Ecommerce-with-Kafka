@@ -1,6 +1,6 @@
 using Ecommerce.ProductService.Extensions;
 using Ecommerce.ProductService.Infraestructure;
-using Ecommerce.Models.Exceptions;
+using Ecommerce.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

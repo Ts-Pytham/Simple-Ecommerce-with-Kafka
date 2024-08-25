@@ -1,5 +1,5 @@
-﻿using Ecommerce.Models.Providers;
-using Ecommerce.Models.PipelineBehaviours;
+﻿using Ecommerce.Shared.Providers;
+using Ecommerce.Shared.PipelineBehaviours;
 using System.Reflection;
 using FluentValidation;
 

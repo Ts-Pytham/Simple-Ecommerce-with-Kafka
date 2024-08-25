@@ -1,4 +1,4 @@
-﻿using Ecommerce.Models;
+﻿using Ecommerce.Shared.Models;
 using Ecommerce.ProductService.Infraestructure;
 using MediatR;
 using SimpleResults;

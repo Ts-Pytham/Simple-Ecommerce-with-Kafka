@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.Models;
+﻿namespace Ecommerce.Shared.Models;
 public class Order : IEntity
 {
     public int Id { get; set; }

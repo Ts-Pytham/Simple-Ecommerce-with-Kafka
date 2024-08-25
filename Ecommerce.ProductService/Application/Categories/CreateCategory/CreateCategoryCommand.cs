@@ -1,9 +1,6 @@
-﻿using Ecommerce.Models;
-using Ecommerce.ProductService.Infraestructure;
-using Ecommerce.ProductService.Utilities.Constants;
+﻿using Ecommerce.Shared.Utilities.Constants;
 using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using SimpleResults;
 
 namespace Ecommerce.ProductService.Application.Categories.CreateCategory;

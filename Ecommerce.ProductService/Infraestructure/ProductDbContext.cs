@@ -1,6 +1,6 @@
-﻿using Ecommerce.Models;
-using Ecommerce.Models.Extensions;
-using Ecommerce.Models.Providers;
+﻿using Ecommerce.Shared.Extensions;
+using Ecommerce.Shared.Models;
+using Ecommerce.Shared.Providers;
 using Ecommerce.ProductService.Infraestructure.EntityTypes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;

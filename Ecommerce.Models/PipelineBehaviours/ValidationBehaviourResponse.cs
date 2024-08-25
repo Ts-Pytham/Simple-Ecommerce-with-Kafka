@@ -2,7 +2,7 @@
 using MediatR;
 using SimpleResults;
 
-namespace Ecommerce.Models.PipelineBehaviours;
+namespace Ecommerce.Shared.PipelineBehaviours;
 public class ValidationBehaviourResponse<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> Validators)
     : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {

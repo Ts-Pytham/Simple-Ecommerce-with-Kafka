@@ -1,5 +1,4 @@
-﻿
-namespace Ecommerce.Models;
+﻿namespace Ecommerce.Shared.Models;
 public class Category : IEntity
 {
     public int Id { get; set; }

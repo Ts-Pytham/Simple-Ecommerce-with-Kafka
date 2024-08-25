@@ -1,5 +1,5 @@
-﻿using Ecommerce.Models;
-using Ecommerce.ProductService.Utilities.Constants;
+﻿using Ecommerce.Shared.Models;
+using Ecommerce.Shared.Utilities.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

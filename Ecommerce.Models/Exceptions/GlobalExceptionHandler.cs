@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using SimpleResults;
 
-namespace Ecommerce.Models.Exceptions;
+namespace Ecommerce.Shared.Exceptions;
 public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> Logger)
     : IExceptionHandler
 {
