@@ -1,9 +1,7 @@
 ﻿using Ecommerce.Models.Providers;
 using Ecommerce.Models.PipelineBehaviours;
-using MediatR;
 using System.Reflection;
 using FluentValidation;
-using Ecommerce.ProductService.Application.CreateProduct;
 
 namespace Ecommerce.ProductService.Extensions;
 
