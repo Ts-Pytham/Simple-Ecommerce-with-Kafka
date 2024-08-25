@@ -1,5 +1,6 @@
 using Ecommerce.ProductService.Extensions;
 using Ecommerce.ProductService.Infraestructure;
+using Ecommerce.ProductService.Kafka;
 using Ecommerce.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddHostedService<KafkaConsumer>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

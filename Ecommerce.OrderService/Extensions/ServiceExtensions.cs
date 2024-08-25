@@ -2,6 +2,7 @@
 using Ecommerce.Shared.Providers;
 using System.Reflection;
 using FluentValidation;
+using Ecommerce.OrderService.Kafka;
 
 namespace Ecommerce.OrderService.Extensions;
 
@@ -22,6 +23,7 @@ public static class ServiceExtensions
             cfg.AddOpenBehavior(typeof(ValidationBehaviourResponse<,>));
         });
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+        services.AddScoped<IKafkaProducer, KafkaProducer>();
         return services;
     }
 }
