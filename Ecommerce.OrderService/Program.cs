@@ -1,5 +1,6 @@
 using Ecommerce.OrderService.Extensions;
 using Ecommerce.OrderService.Infraestructure;
+using Ecommerce.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServices();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddDbContext<OrderDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("OrderDbContext"));
@@ -29,6 +31,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseExceptionHandler(cfg => { });
 
 app.MapControllers();
 

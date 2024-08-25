@@ -1,8 +1,9 @@
 ﻿@page "/cart/{productId:int}"
 @using Ecommerce.Shared.Models
+@using Ecommerce.Shared.Models.Orders
 @using Ecommerce.Shared.Models.Products
 @using SimpleResults
-@inject IJSRuntime js
+@inject SweetAlertService Swal
 
 @inject HttpClient http
 <h3>Cart</h3>
@@ -10,43 +11,64 @@
 <form>
     <div class="form-group mb-4">
         <label for="customer-name">Customer Name</label>
-        <input type="number" class="form-control" id="customer-name" placeholder="Enter customer name" @bind="Order.CustomerName">
-    </div>
-    <div class="form-group mb-4">
-        <label for="product-name">Product Name</label>
-        <input type="number" class="form-control" id="product-name" placeholder="Enter product name" @bind="Product.Name">
+        <input type="text" class="form-control" id="customer-name" placeholder="Enter customer name" @bind="Order.CustomerName">
     </div>
     <div class="form-group mb-4">
         <label for="total">Quantity</label>
         <input type="number" class="form-control" id="quantity" placeholder="Enter quantity" @bind="Order.Quantity">
     </div>
-    <button type="submit" class="btn btn-primary" @onclick="CreateOrder">Create order</button>
+    <button type="button" class="btn btn-primary" @onclick="async () => await CreateOrder()">Create order</button>
 </form>
+
+<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
 
 @code {
     [Parameter]
     public int ProductId { get; set; }
-    public Order Order = new Order();
-    public GetProductListResponse Product = new GetProductListResponse();
+    public CreateOrder Order = new CreateOrder();
 
     protected override async Task OnInitializedAsync()
     {
         Order.ProductId = ProductId;
-        var product = await http.GetFromJsonAsync<Result<GetProductListResponse>>($"https://localhost:7160/api/Products/{ProductId}");
-        Product = product!.IsSuccess ? product.Data : new();
         await base.OnInitializedAsync();
     }
 
-    private async Task CreateOrder()
+    public async Task CreateOrder()
     {
-        var rest = await http.PostAsJsonAsync<Order>("https://localhost:7160/api/Orders", Order);
-        if(rest.IsSuccessStatusCode)
+        var rest = await http.PostAsJsonAsync<CreateOrder>("https://localhost:7084/api/Orders", Order);
+        var result = await rest.Content.ReadFromJsonAsync<Result<CreatedId>>();
+
+        if(result!.IsSuccess)
         {
-            await js.InvokeVoidAsync("alert", "Order created successfully");
+            await Swal.FireAsync("Order created", "The order has been created successfully", SweetAlertIcon.Success);
         }
         else
         {
-            await js.InvokeVoidAsync("alert", "Order creation failed");
-        })
+            var content = new MarkupString(string.Join("", result.Errors.Select(item => $"<li>{item}</li>")));
+            await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "<strong>Order not created</strong>",
+                Html = $"<p> {result.Message} </p> <ul>{content}</ul>",
+                Icon = SweetAlertIcon.Error
+            });
+        }
+    }
+
+    private async Task OnBeforeInternalNavigation(LocationChangingContext context)
+    {
+        var result = await Swal.FireAsync(new SweetAlertOptions
+        {
+            Title = "Are you sure?",
+            Text = "You have unsaved changes. Are you sure you want to leave?",
+            Icon = SweetAlertIcon.Warning,
+            ShowCancelButton = true,
+            ConfirmButtonText = "Yes",
+            CancelButtonText = "No"
+        });
+
+        if (!result.IsConfirmed)
+        {
+            context.PreventNavigation();
+        }
     }
 }

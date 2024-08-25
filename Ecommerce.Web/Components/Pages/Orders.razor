@@ -1,0 +1,40 @@
+﻿@page "/orders"
+@using Ecommerce.Shared.Models
+@using Ecommerce.Shared.Models.Orders
+@using SimpleResults
+@inject HttpClient http
+
+<PageTitle>Orders</PageTitle>
+<h3>OrderList</h3>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-warning">
+        <tr>
+            <th>Customer Name</th>
+            <th>Quantity</th>
+            <th>Product Id</th>
+            <th>OrderDate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var order in OrdersList)
+        {
+            <tr>
+                <td>@order.CustomerName</td>
+                <td>@order.Quantity</td>
+                <td>@order.ProductId</td>
+                <td>@order.OrderDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@code {
+    private IEnumerable<GetOrderListResponse> OrdersList = new List<GetOrderListResponse>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var list = await http.GetFromJsonAsync<ListedResult<GetOrderListResponse>>("https://localhost:7084/api/Orders/list");
+        OrdersList = list is null ? [] : list.Data;
+        await base.OnInitializedAsync();
+    }
+}

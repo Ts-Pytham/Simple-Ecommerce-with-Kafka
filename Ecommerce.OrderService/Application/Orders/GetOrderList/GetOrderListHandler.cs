@@ -1,5 +1,6 @@
 ﻿using Ecommerce.OrderService.Infraestructure;
 using Ecommerce.Shared.Models;
+using Ecommerce.Shared.Models.Orders;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SimpleResults;
