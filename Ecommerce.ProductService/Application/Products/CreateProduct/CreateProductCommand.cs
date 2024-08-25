@@ -5,7 +5,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SimpleResults;
-namespace Ecommerce.ProductService.Application.CreateProduct;
+namespace Ecommerce.ProductService.Application.Products.CreateProduct;
 
 public class CreateProductCommand : IRequest<Result<CreatedId>>
 {
@@ -41,9 +41,9 @@ public class CreateProductValidator : AbstractValidator<CreateProductCommand>
 
         RuleFor(x => x.CategoryId)
             .GreaterThan(0)
-            .MustAsync(async (id, token) 
+            .MustAsync(async (id, token)
                 => await context.Set<Category>().AnyAsync(Category => Category.Id == id, token))
             .WithMessage(ValidationMessages.CategoryNotFound);
-            
+
     }
 }

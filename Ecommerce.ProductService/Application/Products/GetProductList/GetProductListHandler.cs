@@ -4,9 +4,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SimpleResults;
 
-namespace Ecommerce.ProductService.Application.GetProductList;
+namespace Ecommerce.ProductService.Application.Products.GetProductList;
 
-public class GetProductListHandler(ProductDbContext Context) 
+public class GetProductListHandler(ProductDbContext Context)
     : IRequestHandler<GetProductListQuery, ListedResult<GetProductListResponse>>
 {
     public async Task<ListedResult<GetProductListResponse>> Handle(GetProductListQuery request, CancellationToken cancellationToken)
@@ -15,12 +15,12 @@ public class GetProductListHandler(ProductDbContext Context)
             .Select(p => new GetProductListResponse
             {
                 Description = p.Description,
-                CategoryId  = p.CategoryId,
-                Id          = p.Id,
-                ImageUrl    = p.ImageUrl,
-                Name        = p.Name,
-                Price       = p.Price,
-                Quantity    = p.Quantity
+                CategoryId = p.CategoryId,
+                Id = p.Id,
+                ImageUrl = p.ImageUrl,
+                Name = p.Name,
+                Price = p.Price,
+                Quantity = p.Quantity
             })
             .ToListAsync(cancellationToken);
 

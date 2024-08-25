@@ -1,5 +1,5 @@
-﻿using Ecommerce.ProductService.Application.CreateProduct;
-using Ecommerce.ProductService.Application.GetProductList;
+﻿using Ecommerce.ProductService.Application.Products.CreateProduct;
+using Ecommerce.ProductService.Application.Products.GetProductList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SimpleResults;

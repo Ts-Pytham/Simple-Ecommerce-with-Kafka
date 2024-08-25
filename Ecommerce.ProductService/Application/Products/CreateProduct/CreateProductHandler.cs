@@ -3,7 +3,7 @@ using Ecommerce.ProductService.Infraestructure;
 using MediatR;
 using SimpleResults;
 
-namespace Ecommerce.ProductService.Application.CreateProduct;
+namespace Ecommerce.ProductService.Application.Products.CreateProduct;
 
 public class CreateProductHandler(ProductDbContext Context) : IRequestHandler<CreateProductCommand, Result<CreatedId>>
 {
@@ -12,12 +12,12 @@ public class CreateProductHandler(ProductDbContext Context) : IRequestHandler<Cr
     {
         var product = new Product
         {
-            Description     = request.Description,
-            Name            = request.Name,
-            CategoryId      = request.CategoryId,
-            ImageUrl        = request.ImageUrl,
-            Price           = request.Price,
-            Quantity        = request.Quantity,
+            Description = request.Description,
+            Name = request.Name,
+            CategoryId = request.CategoryId,
+            ImageUrl = request.ImageUrl,
+            Price = request.Price,
+            Quantity = request.Quantity,
         };
 
         await Context.AddAsync(product, cancellationToken);
