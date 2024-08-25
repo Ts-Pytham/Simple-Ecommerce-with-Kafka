@@ -3,6 +3,7 @@ using Ecommerce.ProductService.Infraestructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SimpleResults;
+using Ecommerce.Shared.Models.Products;
 
 namespace Ecommerce.ProductService.Application.Products.GetProductList;
 

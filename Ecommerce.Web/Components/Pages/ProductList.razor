@@ -1,0 +1,35 @@
+﻿@page "/products"
+@using Ecommerce.Shared.Models
+@using Ecommerce.Shared.Models.Products
+@using SimpleResults
+@inject HttpClient http
+
+<PageTitle>Products</PageTitle>
+<h3>ProductList</h3>
+
+<div class="row">
+    @foreach(var product in Products)
+    {
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">Price: @product.Price</p>
+                    <p class="card-text">Quantity: @product.Quantity</p>
+                    <p class="card-text">Description: @product.Description</p>
+                    <a href="/cart/@product.Id" class="btn btn-primary">Buy</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@code {
+    private IEnumerable<GetProductListResponse> Products = new List<GetProductListResponse>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var list = await http.GetFromJsonAsync<ListedResult<GetProductListResponse>>("https://localhost:7160/api/Products/list");
+        Products = list is null ? [] : list.Data;
+        await base.OnInitializedAsync();
+    }
+}

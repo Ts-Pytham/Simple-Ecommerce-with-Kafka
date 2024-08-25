@@ -1,0 +1,52 @@
+﻿@page "/cart/{productId:int}"
+@using Ecommerce.Shared.Models
+@using Ecommerce.Shared.Models.Products
+@using SimpleResults
+@inject IJSRuntime js
+
+@inject HttpClient http
+<h3>Cart</h3>
+
+<form>
+    <div class="form-group mb-4">
+        <label for="customer-name">Customer Name</label>
+        <input type="number" class="form-control" id="customer-name" placeholder="Enter customer name" @bind="Order.CustomerName">
+    </div>
+    <div class="form-group mb-4">
+        <label for="product-name">Product Name</label>
+        <input type="number" class="form-control" id="product-name" placeholder="Enter product name" @bind="Product.Name">
+    </div>
+    <div class="form-group mb-4">
+        <label for="total">Quantity</label>
+        <input type="number" class="form-control" id="quantity" placeholder="Enter quantity" @bind="Order.Quantity">
+    </div>
+    <button type="submit" class="btn btn-primary" @onclick="CreateOrder">Create order</button>
+</form>
+
+@code {
+    [Parameter]
+    public int ProductId { get; set; }
+    public Order Order = new Order();
+    public GetProductListResponse Product = new GetProductListResponse();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Order.ProductId = ProductId;
+        var product = await http.GetFromJsonAsync<Result<GetProductListResponse>>($"https://localhost:7160/api/Products/{ProductId}");
+        Product = product!.IsSuccess ? product.Data : new();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task CreateOrder()
+    {
+        var rest = await http.PostAsJsonAsync<Order>("https://localhost:7160/api/Orders", Order);
+        if(rest.IsSuccessStatusCode)
+        {
+            await js.InvokeVoidAsync("alert", "Order created successfully");
+        }
+        else
+        {
+            await js.InvokeVoidAsync("alert", "Order creation failed");
+        })
+    }
+}
