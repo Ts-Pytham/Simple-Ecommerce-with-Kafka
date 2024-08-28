@@ -39,6 +39,11 @@ public class KafkaConsumer(IServiceScopeFactory scopeFactory) : BackgroundServic
 
             if (product is not null)
             {
+                if (product.Quantity - order.Quantity < 0)
+                {
+                    continue;
+                }
+
                 product.Quantity -= order.Quantity;
                 await dbContext.SaveChangesAsync();
             }

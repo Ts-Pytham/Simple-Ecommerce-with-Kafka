@@ -27,6 +27,11 @@ public class OrderController(IMediator Mediator, IKafkaProducer Producer)
     {
         var result = await Mediator.Send(command);
 
+        if (result.IsFailed)
+        {
+            return BadRequest(result);
+        }
+
         //producer a message
         await Producer.ProduceAsync("order-topic", new Message<string, string>
         {
